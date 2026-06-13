@@ -11,5 +11,9 @@ __pycache__/
 
 .DS_Store
 Thumbs.db
-
 results/*.zip
+!results/llama31_8b_lora_adapter_fp16.zip
+results/adapter_tmp/
+results/adapter_fp16/
+results/llama31_8b_lora_adapter/
+*.safetensors

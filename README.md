@@ -55,33 +55,33 @@ results/data_check.json
 
 Підсумок перевірки:
 
-| Перевірка                | Результат |
-| ------------------------ | --------: |
-| Eval examples            |        30 |
-| Train examples           |       300 |
-| Eval schema errors       |         0 |
-| Train schema errors      |         0 |
-| Email overlap train/eval |         0 |
-| Duplicate eval emails    |         0 |
-| Duplicate train emails   |         0 |
+| Перевірка | Результат |
+|---|---:|
+| Eval examples | 30 |
+| Train examples | 300 |
+| Eval schema errors | 0 |
+| Train schema errors | 0 |
+| Email overlap train/eval | 0 |
+| Duplicate eval emails | 0 |
+| Duplicate train emails | 0 |
 
 Розподіл `urgency` в eval set:
 
-| Urgency  | Кількість |
-| -------- | --------: |
-| low      |        10 |
-| medium   |        11 |
-| high     |         6 |
-| critical |         3 |
+| Urgency | Кількість |
+|---|---:|
+| low | 10 |
+| medium | 11 |
+| high | 6 |
+| critical | 3 |
 
 Розподіл `urgency` в train set:
 
-| Urgency  | Кількість |
-| -------- | --------: |
-| low      |       108 |
-| medium   |       132 |
-| high     |        38 |
-| critical |        22 |
+| Urgency | Кількість |
+|---|---:|
+| low | 108 |
+| medium | 132 |
+| high | 38 |
+| critical | 22 |
 
 Висновок: dataset валідний, train/eval overlap відсутній, можна чесно порівнювати baseline і fine-tuned модель на одному eval set.
 
@@ -105,18 +105,18 @@ results/baseline_8b_metrics.json
 
 Baseline results:
 
-| Метрика                 | Значення |
-| ----------------------- | -------: |
-| JSON valid              |    96.7% |
-| Exact match             |    30.0% |
-| customer_name accuracy  |    96.7% |
-| product accuracy        |    80.0% |
-| issue_category accuracy |    76.7% |
-| urgency accuracy        |    53.3% |
-| summary accuracy        |    50.0% |
-| Avg input tokens        |     24.1 |
-| Avg output tokens       |     51.0 |
-| Avg seconds/example     |     6.56 |
+| Метрика | Значення |
+|---|---:|
+| JSON valid | 96.7% |
+| Exact match | 30.0% |
+| customer_name accuracy | 96.7% |
+| product accuracy | 80.0% |
+| issue_category accuracy | 76.7% |
+| urgency accuracy | 53.3% |
+| summary accuracy | 50.0% |
+| Avg input tokens | 24.1 |
+| Avg output tokens | 51.0 |
+| Avg seconds/example | 6.56 |
 
 Baseline майже завжди повертав валідний JSON, але мав слабку якість по `urgency` і `summary`. Для бізнес-задачі це критично, тому що неправильна `urgency` може призвести до пропуску critical incidents.
 
@@ -128,21 +128,21 @@ Fine-tuning виконано в Google Colab на T4 GPU.
 
 Параметри:
 
-| Параметр             | Значення                                      |
-| -------------------- | --------------------------------------------- |
-| Base model           | Llama 3.1 8B Instruct                         |
-| Model checkpoint     | `unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit` |
-| Method               | QLoRA                                         |
-| Quantization         | 4-bit                                         |
-| LoRA r               | 16                                            |
-| LoRA alpha           | 32                                            |
-| Epochs               | 3                                             |
-| Train examples       | 300                                           |
-| Trainable parameters | 41,943,040                                    |
-| Total parameters     | 8,072,204,288                                 |
-| Trainable share      | 0.52%                                         |
-| Training time        | 7.2 minutes                                   |
-| Final train loss     | 0.2452                                        |
+| Параметр | Значення |
+|---|---|
+| Base model | Llama 3.1 8B Instruct |
+| Model checkpoint | `unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit` |
+| Method | QLoRA |
+| Quantization | 4-bit |
+| LoRA r | 16 |
+| LoRA alpha | 32 |
+| Epochs | 3 |
+| Train examples | 300 |
+| Trainable parameters | 41,943,040 |
+| Total parameters | 8,072,204,288 |
+| Trainable share | 0.52% |
+| Training time | 7.2 minutes |
+| Final train loss | 0.2452 |
 
 Training summary:
 
@@ -150,11 +150,13 @@ Training summary:
 results/training_summary.json
 ```
 
-LoRA adapter:
+LoRA adapter weights збережено у репозиторії як стиснений FP16-архів:
 
 ```text
-LoRA adapter було збережено локально після тренування, але не додано в GitHub через обмеження розміру файлів. У репозиторії залишені notebook, training summary та evaluation metrics, яких достатньо для перевірки й відтворення експерименту.
+results/llama31_8b_lora_adapter_fp16.zip
 ```
+
+Початковий adapter zip був більший за 100 MB, тому weights були конвертовані у FP16-версію, щоб artifact можна було додати в GitHub і здати без окремих додатків.
 
 ---
 
@@ -170,34 +172,34 @@ results/finetuned_8b_metrics.json
 
 Fine-tuned results:
 
-| Метрика                 | Значення |
-| ----------------------- | -------: |
-| JSON valid              |   100.0% |
-| Exact match             |    70.0% |
-| customer_name accuracy  |    93.3% |
-| product accuracy        |    96.7% |
-| issue_category accuracy |    90.0% |
-| urgency accuracy        |    93.3% |
-| summary accuracy        |    83.3% |
-| Avg input tokens        |     24.1 |
-| Avg output tokens       |     42.0 |
-| Avg seconds/example     |     3.10 |
+| Метрика | Значення |
+|---|---:|
+| JSON valid | 100.0% |
+| Exact match | 70.0% |
+| customer_name accuracy | 93.3% |
+| product accuracy | 96.7% |
+| issue_category accuracy | 90.0% |
+| urgency accuracy | 93.3% |
+| summary accuracy | 83.3% |
+| Avg input tokens | 24.1 |
+| Avg output tokens | 42.0 |
+| Avg seconds/example | 3.10 |
 
 ---
 
 ## 7. Порівняння baseline vs fine-tuned
 
-| Метрика                 | Baseline 8B | Fine-tuned 8B |      Зміна |
-| ----------------------- | ----------: | ------------: | ---------: |
-| JSON valid              |       96.7% |        100.0% |  +3.3 п.п. |
-| Exact match             |       30.0% |         70.0% | +40.0 п.п. |
-| customer_name accuracy  |       96.7% |         93.3% |  -3.4 п.п. |
-| product accuracy        |       80.0% |         96.7% | +16.7 п.п. |
-| issue_category accuracy |       76.7% |         90.0% | +13.3 п.п. |
-| urgency accuracy        |       53.3% |         93.3% | +40.0 п.п. |
-| summary accuracy        |       50.0% |         83.3% | +33.3 п.п. |
-| Avg output tokens       |        51.0 |          42.0 |       -9.0 |
-| Avg seconds/example     |        6.56 |          3.10 |     швидше |
+| Метрика | Baseline 8B | Fine-tuned 8B | Зміна |
+|---|---:|---:|---:|
+| JSON valid | 96.7% | 100.0% | +3.3 п.п. |
+| Exact match | 30.0% | 70.0% | +40.0 п.п. |
+| customer_name accuracy | 96.7% | 93.3% | -3.4 п.п. |
+| product accuracy | 80.0% | 96.7% | +16.7 п.п. |
+| issue_category accuracy | 76.7% | 90.0% | +13.3 п.п. |
+| urgency accuracy | 53.3% | 93.3% | +40.0 п.п. |
+| summary accuracy | 50.0% | 83.3% | +33.3 п.п. |
+| Avg output tokens | 51.0 | 42.0 | -9.0 |
+| Avg seconds/example | 6.56 | 3.10 | швидше |
 
 Fine-tuning суттєво покращив якість саме на ключових полях:
 
@@ -321,13 +323,13 @@ Notebook виконує:
 
 ## 13. Файли результатів
 
-| Файл                                                          | Призначення                    |
-| ------------------------------------------------------------- | ------------------------------ |
-| `results/data_check.json`                                     | перевірка dataset              |
-| `results/baseline_8b_metrics.json`                            | baseline metrics               |
-| `results/training_summary.json`                               | параметри і результат training |
-| `results/finetuned_8b_metrics.json`                           | fine-tuned metrics             |
-| `results/llama31_8b_lora_adapter.zip`                         | LoRA adapter                   |
+| Файл | Призначення |
+|---|---|
+| `results/data_check.json` | перевірка dataset |
+| `results/baseline_8b_metrics.json` | baseline metrics |
+| `results/training_summary.json` | параметри і результат training |
+| `results/finetuned_8b_metrics.json` | fine-tuned metrics |
+| `results/llama31_8b_lora_adapter_fp16.zip` | стиснений FP16 LoRA adapter weights |
 | `notebooks/lesson17_llama31_8b_baseline_finetune_clean.ipynb` | основний notebook експерименту |
 
 ---
