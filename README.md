@@ -153,7 +153,7 @@ results/training_summary.json
 LoRA adapter:
 
 ```text
-results/llama31_8b_lora_adapter.zip
+LoRA adapter було збережено локально після тренування, але не додано в GitHub через обмеження розміру файлів. У репозиторії залишені notebook, training summary та evaluation metrics, яких достатньо для перевірки й відтворення експерименту.
 ```
 
 ---
