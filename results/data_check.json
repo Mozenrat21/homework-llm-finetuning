@@ -1,0 +1,38 @@
+{
+  "eval_count": 30,
+  "train_count": 300,
+  "eval_errors_count": 0,
+  "train_errors_count": 0,
+  "email_overlap_count": 0,
+  "duplicate_eval_emails_count": 0,
+  "duplicate_train_emails_count": 0,
+  "eval_issue_category_distribution": {
+    "other": 5,
+    "billing": 7,
+    "technical": 7,
+    "account": 6,
+    "feature_request": 5
+  },
+  "train_issue_category_distribution": {
+    "billing": 60,
+    "technical": 60,
+    "account": 60,
+    "feature_request": 60,
+    "other": 60
+  },
+  "eval_urgency_distribution": {
+    "low": 10,
+    "high": 6,
+    "critical": 3,
+    "medium": 11
+  },
+  "train_urgency_distribution": {
+    "high": 38,
+    "medium": 132,
+    "critical": 22,
+    "low": 108
+  },
+  "eval_errors": [],
+  "train_errors": [],
+  "passed": true
+}

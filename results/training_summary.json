@@ -1,0 +1,14 @@
+{
+  "model": "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit",
+  "method": "QLoRA",
+  "base_model": "Llama 3.1 8B Instruct",
+  "load_in_4bit": true,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "epochs": 3,
+  "train_examples": 300,
+  "training_seconds": 431.97,
+  "training_minutes": 7.2,
+  "final_train_loss": 0.24517662038928584,
+  "adapter_dir": "results/llama31_8b_lora_adapter"
+}
